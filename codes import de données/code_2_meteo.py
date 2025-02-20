@@ -74,23 +74,23 @@ with open(csv_file, 'a', newline='', encoding='utf-8') as file:
                         with open(id_file, 'w', encoding='utf-8') as f:
                             f.write(str(current_id))
 
-                        print(f"✅ ID {current_id} récupéré avec succès.")
+                        print(f" ID {current_id} récupéré avec succès.")
 
                     elif response.status_code == 404:
-                        print(f"❌ L'ID {current_id} n'existe pas. Arrêt du script.")
+                        print(f" L'ID {current_id} n'existe pas. Arrêt du script.")
                         exit()
 
                     else:
-                        print(f"⚠️ Erreur {response.status_code} pour l'ID {current_id}. Passage au suivant.")
+                        print(f" Erreur {response.status_code} pour l'ID {current_id}. Passage au suivant.")
                         error_count += 1  
 
                 except requests.exceptions.RequestException as e:
-                    print(f"❌ Erreur de connexion pour l'ID {current_id}: {e}")
+                    print(f" Erreur de connexion pour l'ID {current_id}: {e}")
                     error_count += 1  
 
                 # Si une erreur survient, sauvegarde de l'ID et pause avant de réessayer
                 if error_count >= 1:
-                    print(f"🚨 Erreur détectée. Sauvegarde de l'ID et pause de {error_pause_time} secondes.")
+                    print(f" Erreur détectée. Sauvegarde de l'ID et pause de {error_pause_time} secondes.")
                     with open(id_file, 'w', encoding='utf-8') as f:
                         f.write(str(current_id))
                     time.sleep(error_pause_time)  # Pause avant de réessayer
@@ -100,7 +100,7 @@ with open(csv_file, 'a', newline='', encoding='utf-8') as file:
 
                 # Pause après un certain nombre de requêtes
                 if current_id % pause_interval == 0:
-                    print(f"⏸️ Pause de {pause_time} seconde(s) après {pause_interval} ID.")
+                    print(f" Pause de {pause_time} seconde(s) après {pause_interval} ID.")
                     time.sleep(pause_time)
 
             # Écriture des nouvelles données récupérées
